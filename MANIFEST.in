@@ -1,0 +1,2 @@
+include ./bdk-ffi/Cargo.toml
+recursive-include src *
