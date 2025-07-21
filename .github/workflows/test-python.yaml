@@ -26,8 +26,11 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           persist-credentials: false
+
+      - name: "Configure Git safe directory"
+        run: git config --global --add safe.directory /__w/bdkpython/bdkpython
 
       - name: "Install Rust 1.84.1"
         uses: actions-rs/toolchain@v1
@@ -68,7 +71,7 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           persist-credentials: false
 
       - name: "Install Python"
@@ -110,7 +113,7 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           persist-credentials: false
 
       - uses: actions/setup-python@v4
@@ -151,7 +154,7 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           persist-credentials: false
 
       - name: "Install Python"
@@ -185,8 +188,11 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           persist-credentials: false
+
+      - name: "Configure Git safe directory"
+        run: git config --global --add safe.directory /__w/bdkpython/bdkpython
 
       - name: "Install Ruff"
         run: curl -LsSf https://astral.sh/ruff/install.sh | sh
