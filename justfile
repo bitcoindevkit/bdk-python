@@ -16,6 +16,16 @@ clean:
   rm -rf ./build/
   rm -rf ./dist/
 
+[group("Submodule")]
+[doc("Initialize bdk-ffi submodule to committed hash.")]
+submodule-init:
+  git submodule update --init
+
+[group("Submodule")]
+[doc("Hard reset the bdk-ffi submodule to committed hash.")]
+submodule-reset:
+  git submodule update --force
+
 [group("Test")]
 [doc("Run all tests.")]
 test:
