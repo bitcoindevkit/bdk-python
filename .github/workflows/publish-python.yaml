@@ -25,6 +25,7 @@ jobs:
         with:
           submodules: recursive
           persist-credentials: false
+          fetch-depth: 0
 
       - name: "Configure Git safe directory"
         run: git config --global --add safe.directory /__w/bdkpython/bdkpython
@@ -63,6 +64,7 @@ jobs:
         with:
           submodules: recursive
           persist-credentials: false
+          fetch-depth: 0
 
       - name: "Install Python"
         uses: actions/setup-python@v4
@@ -99,6 +101,7 @@ jobs:
         with:
           submodules: recursive
           persist-credentials: false
+          fetch-depth: 0
 
       - name: "Install Python"
         uses: actions/setup-python@v4
@@ -134,6 +137,7 @@ jobs:
         with:
           submodules: recursive
           persist-credentials: false
+          fetch-depth: 0
 
       - uses: actions/setup-python@v4
         with:
