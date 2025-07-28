@@ -26,7 +26,7 @@ setup(
     zip_safe=False,
     packages=["bdkpython"],
     package_dir={"bdkpython": "./src/bdkpython"},
-    url="https://github.com/bitcoindevkit/bdk-ffi",
+    url="https://github.com/bitcoindevkit/bdkpython",
     author="Bitcoin Dev Kit Developers <dev@bitcoindevkit.org>",
     license="MIT or Apache 2.0",
     # This is required to ensure the library name includes the python version, abi, and platform tags
