@@ -2,8 +2,9 @@
 
 set -euo pipefail
 
-echo "Making sure the submodule is initialized..."
-git submodule update --init --recursive
+printf "\nSubmodule check...\n"
+git submodule update --init
+printf "Submodule is checked out at commit: $(git submodule status)\n\n"
 
 echo "Setting up Python dependencies..."
 python3 --version
