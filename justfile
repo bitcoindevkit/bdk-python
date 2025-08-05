@@ -16,6 +16,16 @@ clean:
   rm -rf ./build/
   rm -rf ./dist/
 
+[group("Build")]
+[doc("Build the wheel using pyproject.toml (modern build system).")]
+build:
+  python3 -m build
+
+[group("Build")]
+[doc("Install the wheel locally (force reinstall).")]
+install:
+  pip3 install dist/bdkpython-*.whl --force-reinstall
+
 [group("Submodule")]
 [doc("Initialize bdk-ffi submodule to committed hash.")]
 submodule-init:
