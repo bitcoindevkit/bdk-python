@@ -24,7 +24,7 @@ source .localpythonenv/bin/activate
 
 bash scripts/generate-macos-arm64.sh
 
-python3 -m build
+python3 -m build --wheel --outdir dist --verbose 
 
 pip3 install ./dist/bdkpython-<yourversion>.whl --force-reinstall
 
