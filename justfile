@@ -19,7 +19,7 @@ clean:
 [group("Build")]
 [doc("Build the wheel using pyproject.toml (modern build system).")]
 build:
-  python3 -m build
+  python3 -m build --wheel --verbose
 
 [group("Build")]
 [doc("Install the wheel locally (force reinstall).")]
