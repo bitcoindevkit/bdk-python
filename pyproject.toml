@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "wheel", "setuptools-rust"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -9,17 +9,14 @@ description = "The Python language bindings for the Bitcoin Development Kit"
 readme = "README.md"
 requires-python = ">=3.7"
 license = "MIT OR Apache-2.0"
+license-files = ["LICENSE-MIT", "LICENSE-APACHE"]
 authors = [
-  {name = "Bitcoin Dev Kit Developers", email = "dev@bitcoindevkit.org"}
+    { name = "Bitcoin Dev Kit Developers", email = "dev@bitcoindevkit.org" }
 ]
 keywords = ["bitcoin", "bdk", "wallet", "ffi", "rust"]
 classifiers = [
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Rust",
-  "Operating System :: OS Independent"
-]
-dependencies = [
-  "cffi>=1.0"
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
 ]
 
 [project.urls]
@@ -32,13 +29,8 @@ include-package-data = true
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.setuptools.package-dir]
-bdkpython = "src/bdkpython"
-
-[tool.setuptools-rust]
-rust_extensions = [
-  { path = "Cargo.toml", binding = "pyo3", debug = true }
-]
+[tool.setuptools.package-data]
+bdkpython = ["libbdkffi.*"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
