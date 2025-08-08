@@ -45,7 +45,7 @@ jobs:
         run: ${PYBIN}/pip install build
 
       - name: "Build wheel"
-        run: ${PYBIN}/python -m build --wheel --verbose
+        run: ${PYBIN}/python -m build --wheel --config-setting=--build-option=--plat-name=manylinux_2_28_x86_64 --verbose
 
       - name: "Install wheel"
         run: ${PYBIN}/pip install ./dist/*.whl
@@ -91,7 +91,7 @@ jobs:
       - name: "Build wheel"
         # Specifying the plat-name argument is necessary to build a wheel with the correct name,
         # see issue #350 for more information
-        run: python3 -m build --wheel --verbose
+        run: python3 -m build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_arm64 --verbose
 
       # You can't install the arm64 wheel on the CI, so we skip these steps and simply test that the wheel builds
       # - name: "Install wheel and run tests"
@@ -134,7 +134,7 @@ jobs:
         run: pip3 install build
 
       - name: "Build wheel"
-        run: python3 -m build --wheel --verbose
+        run: python3 -m build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_x86_64 --verbose
 
       - name: "Install wheel"
         run: pip3 install ./dist/*.whl
