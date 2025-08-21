@@ -36,6 +36,14 @@ submodule-init:
 submodule-reset:
   git submodule update --force
 
+[group("Submodule")]
+[doc("Checkout the bdk-ffi submodule to the latest commit on master.")]
+submodule-to-master:
+  cd ./bdk-ffi/ \
+  && git fetch origin \
+  && git checkout master \
+  && git pull origin master
+
 [group("Test")]
 [doc("Run all tests.")]
 test:
