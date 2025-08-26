@@ -63,3 +63,7 @@ build/
 
 testing-setup-py-simple-example.py
 .localpythonenv/
+
+# API docs
+api.rst
+_build/

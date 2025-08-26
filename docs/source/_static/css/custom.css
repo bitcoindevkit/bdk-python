@@ -1,0 +1,8 @@
+/* Remove max-width restriction */
+.wy-nav-content {
+    max-width: none !important;
+}
+
+.wy-menu-vertical a {
+    font-size: 1.1em !important;
+}
