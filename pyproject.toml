@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bdkpython"
-version = "2.0.0.dev0"
+version = "2.1.0.dev0"
 description = "The Python language bindings for the Bitcoin Development Kit"
 readme = "README.md"
 requires-python = ">=3.7"
