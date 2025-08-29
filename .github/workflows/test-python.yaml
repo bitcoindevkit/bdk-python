@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: "Configure Git safe directory"
-        run: git config --global --add safe.directory /__w/bdkpython/bdkpython
+        run: git config --global --add safe.directory /__w/bdk-python/bdk-python
 
       - name: "Install Rust 1.84.1"
         uses: actions-rs/toolchain@v1
@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bdkpython-manylinux_2_28_x86_64-${{ matrix.python }}
-          path: /home/runner/work/bdkpython/bdkpython/dist/*.whl
+          path: /home/runner/work/bdk-python/bdk-python/dist/*.whl
 
   build-macos-arm64-wheels:
     name: "Build and test macOS arm64 wheels"
@@ -103,7 +103,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bdkpython-macos-arm64-${{ matrix.python }}
-          path: /Users/runner/work/bdkpython/bdkpython/dist/*.whl
+          path: /Users/runner/work/bdk-python/bdk-python/dist/*.whl
 
   build-macos-x86_64-wheels:
     name: "Build and test macOS x86_64 wheels"
@@ -146,7 +146,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bdkpython-macos-x86_64-${{ matrix.python }}
-          path: /Users/runner/work/bdkpython/bdkpython/dist/*.whl
+          path: /Users/runner/work/bdk-python/bdk-python/dist/*.whl
 
   build-windows-wheels:
     name: "Build and test Windows wheels"
@@ -184,10 +184,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bdkpython-windows-${{ matrix.python }}
-          path: D:\a\bdkpython\bdkpython\dist\*.whl
+          path: D:\a\bdk-python\bdk-python\dist\*.whl
 
       - name: "Install dependencies"
-        run: Get-ChildItem 'D:\a\bdkpython\bdkpython\dist\*.whl' | ForEach-Object {pip install $_.FullName}
+        run: Get-ChildItem 'D:\a\bdk-python\bdk-python\dist\*.whl' | ForEach-Object {pip install $_.FullName}
         shell: powershell
 
       - name: "Run tests"
@@ -205,7 +205,7 @@ jobs:
           fetch-depth: 0
 
       - name: "Configure Git safe directory"
-        run: git config --global --add safe.directory /__w/bdkpython/bdkpython
+        run: git config --global --add safe.directory /__w/bdk-python/bdk-python
 
       - name: "Install Ruff"
         run: curl -LsSf https://astral.sh/ruff/install.sh | sh

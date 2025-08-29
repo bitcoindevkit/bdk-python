@@ -21,7 +21,7 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/bitcoindevkit"
-Repository = "https://github.com/bitcoindevkit/bdkpython"
+Repository = "https://github.com/bitcoindevkit/bdk-python"
 
 [tool.setuptools]
 include-package-data = true
