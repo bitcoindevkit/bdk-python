@@ -1,6 +1,7 @@
 name: Build and Upload Python API Docs
 
 on:
+  pull_request:
   workflow_dispatch:
 
 permissions: {}
