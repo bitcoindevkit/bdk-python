@@ -1,4 +1,4 @@
-name: Build Python API Docs
+name: Build and Upload Python API Docs
 
 on:
   workflow_dispatch:
