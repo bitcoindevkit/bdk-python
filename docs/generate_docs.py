@@ -3,9 +3,9 @@ import re
 import subprocess
 import shutil
 
-# ------------------------
-# Step 1: Generate API RST
-# ------------------------
+# ----------------
+# Generate API RST
+# ----------------
 
 # Define the directory where the Python source files are located
 src_dir = 'src/bdkpython'
@@ -49,26 +49,3 @@ with open(output_file, 'w') as f:
     f.write(rst_content)
 
 print(f"API documentation has been generated in {output_file}")
-
-# -----------------------
-# Step 2: Build HTML docs
-# -----------------------
-
-BUILD_DIR = 'docs/_build/html'
-SOURCE_DIR = 'docs/source'
-
-# Clean previous HTML build
-if os.path.exists(BUILD_DIR):
-    shutil.rmtree(BUILD_DIR)
-
-# Run Sphinx build
-subprocess.run([
-    "sphinx-build",
-    "-b", "html",
-    "-W",                # treat warnings as errors
-    "--keep-going",      # continue despite warnings
-    SOURCE_DIR,
-    BUILD_DIR
-], check=True)
-
-print(f"HTML documentation has been built in {BUILD_DIR}")
