@@ -1,0 +1,40 @@
+name: Build Python API Docs
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  build-docs:
+    name: "Build and Upload API Documentation"
+    runs-on: ubuntu-24.04
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+          fetch-depth: 0
+          
+      - name: "Set up Python"
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+
+      - name: "Install Sphinx and Theme"
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install sphinx sphinx_rtd_theme
+
+      - name: "Build python API Documentation"
+        run: |
+          bash ./scripts/generate-linux.sh
+          cd ./docs/
+          python3 generate_docs.py
+
+      - name: "Upload API Docs"
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact-python-api-docs
+          path: /home/runner/work/bdk-python/bdk-python/docs/_build/html
