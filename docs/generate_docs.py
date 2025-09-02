@@ -3,9 +3,9 @@ import re
 import subprocess
 import shutil
 
-# -----------------------
+# ------------------------
 # Step 1: Generate API RST
-# -----------------------
+# ------------------------
 
 # Define the directory where the Python source files are located
 src_dir = 'src/bdkpython'
