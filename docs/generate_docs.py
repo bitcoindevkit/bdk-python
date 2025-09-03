@@ -26,7 +26,7 @@ for root, _, files in os.walk(src_dir):
             module_path = os.path.relpath(os.path.join(root, file), src_dir)
             module_path = module_path.replace(os.sep, '.').removesuffix('.py')
             full_module = f'{package_root}.{module_path}'
-            with open(os.path.join(root, file), 'r') as f:
+            with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
                 for line in f:
                     match = class_pattern.match(line)
                     if match:
