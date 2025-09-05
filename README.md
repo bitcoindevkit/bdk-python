@@ -30,3 +30,14 @@ pip3 install ./dist/bdkpython-<yourversion>.whl --force-reinstall
 
 python3 -m unittest --verbose
 ```
+
+## Build HTML API Documentation (Optional)
+
+6. Generate docs
+7. Build HTML Documentation
+
+```sh
+python3 ./docs/generate_docs.py
+
+python3 -m sphinx -b html -W --keep-going -v docs/source docs/_build/html
+```
