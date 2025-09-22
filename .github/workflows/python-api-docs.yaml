@@ -1,4 +1,4 @@
-name: Build and Upload Python API Docs
+name: Build Python API Docs
 
 on:
   workflow_dispatch:
@@ -6,21 +6,9 @@ on:
 permissions: {}
 
 jobs:
-  build-manylinux_2_28-x86_64-api-docs:
-    name: "Build and upload docs on Manylinux 2.28 x86_64"
+  build-api-docs:
+    name: "Build bdkpython API docs"
     runs-on: ubuntu-24.04
-    container:
-      image: quay.io/pypa/manylinux_2_28_x86_64
-      env:
-        PLAT: manylinux_2_28_x86_64
-        PYBIN: "/opt/python/${{ matrix.python }}/bin"
-    strategy:
-      matrix:
-        python:
-          - cp310-cp310
-          - cp311-cp311
-          - cp312-cp312
-          - cp313-cp313
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -36,149 +24,28 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: 1.84.1
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
       - name: "Generate bdk.py"
+        env:
+          PYBIN: ${{ env.pythonLocation }}/bin
         run: bash ./scripts/generate-linux.sh
-
-      - name: "Install Sphinx and Theme"
-        run: ${PYBIN}/pip install sphinx sphinx_rtd_theme
-
-      - name: "Generate python API Documentation"
-        run: |
-          ${PYBIN}/python ./docs/generate_docs.py
-      
-      - name: "Build HTML Documentation"
-        run: |
-          ${PYBIN}/python -m sphinx -b html -W --keep-going  docs/source docs/_build/html
-
-      - name: "Upload API Docs"
-        uses: actions/upload-artifact@v4
-        with:
-          name: bdkpython-manylinux_2_28_x86_64-${{ matrix.python }}-api-docs
-          path: /home/runner/work/bdk-python/bdk-python/docs/_build/html
-
-  build-macos-arm64-api-docs:
-    name: "Build and upload docs on macOS arm64"
-    runs-on: macos-14
-    strategy:
-      matrix:
-        python:
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          - "3.13"
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          persist-credentials: false
-          fetch-depth: 0
-
-      - name: "Install Python"
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python }}
-
-      - name: "Generate bdk.py"
-        run: bash ./scripts/generate-macos-arm64.sh
-
-      - name: "Install Sphinx and Theme"
-        run: pip3 install sphinx sphinx_rtd_theme
-
-      - name: "Generate python API Documentation"
-        run: |
-          python3 ./docs/generate_docs.py
-      
-      - name: "Build HTML Documentation"
-        run: |
-          python3 -c "import platform; print(platform.machine())"
-          python3 -m sphinx -b html -W --keep-going -v docs/source docs/_build/html
-
-      - name: "Upload API Docs"
-        uses: actions/upload-artifact@v4
-        with:
-          name: bdkpython-macos-arm64-${{ matrix.python }}-api-docs
-          path: /Users/runner/work/bdk-python/bdk-python/docs/_build/html
-
-  build-macos-x86_64-api-docs:
-    name: "Build and upload docs on macOS x86_64"
-    runs-on: macos-13
-    strategy:
-      matrix:
-        python:
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          - "3.13"
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          persist-credentials: false
-          fetch-depth: 0
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python }}
-
-      - name: "Generate bdk.py"
-        run: bash ./scripts/generate-macos-x86_64.sh
-
-      - name: "Install Sphinx and Theme"
-        run: pip3 install sphinx sphinx_rtd_theme
-
-      - name: "Generate python API Documentation"
-        run: |
-          python3 ./docs/generate_docs.py
-      - name: "Build HTML Documentation"
-        run: python3 -m sphinx -b html -W --keep-going  docs/source docs/_build/html
-
-      - name: "Upload API Docs"
-        uses: actions/upload-artifact@v4
-        with:
-          name: bdkpython-macos-x86_64-${{ matrix.python }}
-          path: /Users/runner/work/bdk-python/bdk-python/docs/_build/html
-
-  build-windows-api-docs:
-    name: "Build and upload docs on Windows"
-    runs-on: windows-2022
-    strategy:
-      matrix:
-        python:
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          - "3.13"
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          persist-credentials: false
-          fetch-depth: 0
-
-      - name: "Install Python"
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python }}
-
-      - name: "Generate bdk.py"
-        run: bash ./scripts/generate-windows.sh
 
       - name: "Install Sphinx and Theme"
         run: pip install sphinx sphinx_rtd_theme
 
       - name: "Generate python API Documentation"
-        run: |
-          python ./docs/generate_docs.py
+        run: python ./docs/generate_docs.py
           
       - name: "Build HTML Documentation"
-        run: python -m sphinx -b html -W --keep-going  docs/source docs/_build/html
+        run: python -m sphinx -b html -W --keep-going docs/source docs/_build/html
 
       - name: "Upload API Docs"
         uses: actions/upload-artifact@v4
         with:
-          name: bdkpython-windows-${{ matrix.python }}
-          path: D:\a\bdk-python\bdk-python\docs/_build/html
+          name: artifact-bdkpython-api-docs
+          path: /home/runner/work/bdk-python/bdk-python/docs/_build/html
