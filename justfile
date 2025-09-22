@@ -26,6 +26,11 @@ build:
 install:
   pip3 install dist/bdkpython-*.whl --force-reinstall
 
+[group("Build")]
+[doc("Build Sphinx api documentation.")]
+api-docs:
+  python3 -m sphinx -b html -W --keep-going -v docs/source docs/_build/html
+
 [group("Submodule")]
 [doc("Initialize bdk-ffi submodule to committed hash.")]
 submodule-init:
