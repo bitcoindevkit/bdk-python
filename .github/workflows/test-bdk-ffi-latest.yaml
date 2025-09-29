@@ -81,7 +81,7 @@ jobs:
 
   test-bdk-ffi-latest-macos-arm64-wheels:
     name: "Build and run unittest on macOS arm64 wheels against the latest commit on bdk-ffi"
-    runs-on: macos-13
+    runs-on: macos-14
     strategy:
       matrix:
         python:
@@ -130,11 +130,10 @@ jobs:
         # see issue #350 for more information
         run: python3 -m build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_arm64 --verbose
 
-      # You can't install the arm64 wheel on the CI, so we skip these steps and simply test that the wheel builds
-      # - name: "Install wheel and run tests"
-      #   run: |
-      #     pip3 install ./dist/*.whl
-      #     python3 -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
+      - name: "Install wheel and run tests"
+        run: |
+          pip3 install ./dist/*.whl
+          python3 -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
 
       - name: "Upload artifact test"
         uses: actions/upload-artifact@v4
