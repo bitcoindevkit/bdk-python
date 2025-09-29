@@ -1,8 +1,6 @@
 name: Test on BDK-FFI Latest Commit
 
 on:
-  push:
-      branches: [ "ci/test-bdk-ffi-latest" ]
   workflow_dispatch:
   repository_dispatch:
     types: [ trigger-bdk-python-test ]
