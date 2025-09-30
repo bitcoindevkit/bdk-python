@@ -142,7 +142,7 @@ jobs:
 
   test-bdk-ffi-latest-macos-x86_64-wheels:
     name: "Build and run unittest on macOS x86_64 wheels against the latest commit on bdk-ffi"
-    runs-on: macos-13
+    runs-on: macos-15-intel
     strategy:
       matrix:
         python:
