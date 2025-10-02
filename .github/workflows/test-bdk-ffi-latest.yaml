@@ -51,10 +51,10 @@ jobs:
             ./target
           key: ${{ runner.os }}-${{ hashFiles('**/Cargo.toml','**/Cargo.lock') }}
 
-      - name: "Install Rust 1.84.1"
-        uses: actions-rs/toolchain@v1
+      - name: "Setup Rust"
+        uses: actions-rust-lang/setup-rust-toolchain@v1.15.0
         with:
-          toolchain: 1.84.1
+          toolchain: 1.85.1
           
       - name: "Generate bdk.py and binaries"
         run: bash ./scripts/generate-linux.sh
@@ -70,12 +70,6 @@ jobs:
 
       - name: "Run tests"
         run: ${PYBIN}/python -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
-
-      - name: "Upload artifact test"
-        uses: actions/upload-artifact@v4
-        with:
-          name: bdkpython-manylinux_2_28_x86_64-${{ matrix.python }}
-          path: /home/runner/work/bdk-python/bdk-python/dist/*.whl
 
   test-bdk-ffi-latest-macos-arm64-wheels:
     name: "Build and run unittest on macOS arm64 wheels against the latest commit on bdk-ffi"
@@ -134,12 +128,6 @@ jobs:
       - name: "Run tests"
         run: python3 -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
 
-      - name: "Upload artifact test"
-        uses: actions/upload-artifact@v4
-        with:
-          name: bdkpython-macos-arm64-${{ matrix.python }}
-          path: /Users/runner/work/bdk-python/bdk-python/dist/*.whl
-
   test-bdk-ffi-latest-macos-x86_64-wheels:
     name: "Build and run unittest on macOS x86_64 wheels against the latest commit on bdk-ffi"
     runs-on: macos-15-intel
@@ -194,12 +182,6 @@ jobs:
       - name: "Run tests"
         run: python3 -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
 
-      - name: "Upload artifact test"
-        uses: actions/upload-artifact@v4
-        with:
-          name: bdkpython-macos-x86_64-${{ matrix.python }}
-          path: /Users/runner/work/bdk-python/bdk-python/dist/*.whl
-
   test-bdk-ffi-latest-windows-wheels:
     name: "Build and run unittest on Windows wheels against the latest commit on bdk-ffi"
     runs-on: windows-2022
@@ -248,12 +230,6 @@ jobs:
 
       - name: "Build wheel"
         run: python -m build --wheel --verbose
-
-      - name: "Upload artifact test"
-        uses: actions/upload-artifact@v4
-        with:
-          name: bdkpython-windows-${{ matrix.python }}
-          path: D:\a\bdk-python\bdk-python\dist\*.whl
 
       - name: "Install dependencies"
         run: Get-ChildItem 'D:\a\bdk-python\bdk-python\dist\*.whl' | ForEach-Object {pip install $_.FullName}
