@@ -34,13 +34,13 @@ jobs:
         run: bash ./scripts/generate-linux.sh
 
       - name: "Install Sphinx and Theme"
-        run: pip install sphinx sphinx_rtd_theme
+        run: pip3 install sphinx sphinx_rtd_theme
 
       - name: "Generate python API Documentation"
-        run: python ./docs/generate_docs.py
+        run: python3 ./docs/generate_docs.py
           
       - name: "Build HTML Documentation"
-        run: python -m sphinx -b html -W --keep-going docs/source docs/_build/html
+        run: python3 -m sphinx -b html -W --keep-going docs/source docs/_build/html
 
       - name: "Upload API Docs"
         uses: actions/upload-artifact@v4

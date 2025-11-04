@@ -37,7 +37,7 @@ jobs:
         run: bash ./scripts/generate-linux.sh
 
       - name: "Install build"
-        run: pip install build
+        run: ${PYBIN}/pip install build
 
       - name: "Build wheel"
         # Specifying the plat-name argument is necessary to build a wheel with the correct name,
