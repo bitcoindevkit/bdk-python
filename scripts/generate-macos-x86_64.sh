@@ -12,7 +12,6 @@ pip install -r requirements.txt
 
 cd ./bdk-ffi/bdk-ffi/
 
-rustup default 1.84.1
 rustup target add x86_64-apple-darwin
 
 echo "Generating native binaries..."

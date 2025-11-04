@@ -12,8 +12,6 @@ ${PYBIN}/pip install -r requirements.txt
 
 cd ./bdk-ffi/bdk-ffi/
 
-rustup default 1.84.1
-
 echo "Generating native binaries..."
 cargo build --profile release-smaller
 
