@@ -71,7 +71,7 @@ jobs:
 
   test-bdk-ffi-latest-macos-arm64-wheels:
     name: "Build and run unittest on macOS arm64 wheels against the latest commit on bdk-ffi"
-    runs-on: macos-14
+    runs-on: macos-15
     strategy:
       matrix:
         python:

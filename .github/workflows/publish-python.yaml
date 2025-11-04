@@ -51,7 +51,7 @@ jobs:
 
   build-macos-arm64-wheels:
     name: "Build macOS arm64 wheel"
-    runs-on: macos-13
+    runs-on: macos-15
     strategy:
       matrix:
         python:
@@ -94,7 +94,7 @@ jobs:
 
   build-macos-x86_64-wheels:
     name: "Build macOS x86_64 wheel"
-    runs-on: macos-13
+    runs-on: macos-15-intel
     strategy:
       matrix:
         python:
