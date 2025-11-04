@@ -6,7 +6,7 @@
 [group("Repo")]
 [doc("Open repo on GitHub in your default browser.")]
 repo:
-  open https://github.com/bitcoindevkit/bdk-ffi
+  open https://github.com/bitcoindevkit/bdk-python/
 
 [group("Build")]
 [doc("Remove all caches and previous builds to start from scratch.")]
