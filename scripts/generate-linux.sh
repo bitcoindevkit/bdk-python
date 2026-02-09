@@ -8,7 +8,15 @@ printf "Submodule is checked out at commit: $(git submodule status)\n\n"
 
 echo "Setting up Python dependencies..."
 ${PYBIN}/python --version
-${PYBIN}/pip install -r requirements.txt
+
+# Check for uv first (faster), then fall back to pip
+if command -v uv &> /dev/null; then
+    echo "Using uv to install dependencies..."
+    uv add -r requirements.txt
+else
+    echo "Using pip to install dependencies..."
+    ${PYBIN}/pip install -r requirements.txt || ${PYBIN}/pip3 install -r requirements.txt
+fi
 
 cd ./bdk-ffi/bdk-ffi/
 
