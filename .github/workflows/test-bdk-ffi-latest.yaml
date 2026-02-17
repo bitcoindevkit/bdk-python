@@ -34,6 +34,9 @@ jobs:
       - name: "Configure Git safe directory"
         run: git config --global --add safe.directory /__w/bdk-python/bdk-python
 
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v7
+
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
@@ -53,18 +56,15 @@ jobs:
             ~/.cargo/git
             ./target
           key: ${{ runner.os }}-${{ hashFiles('**/Cargo.toml','**/Cargo.lock') }}
-          
+
       - name: "Generate bdk.py and binaries"
         run: bash ./scripts/generate-linux.sh
 
-      - name: "Install build"
-        run: ${PYBIN}/pip install build
-
       - name: "Build wheel"
-        run: ${PYBIN}/python -m build --wheel --config-setting=--build-option=--plat-name=manylinux_2_28_x86_64 --verbose
+        run: UV_PYTHON=${PYBIN}/python uv build --wheel -C=--build-option=--plat-name=manylinux_2_28_x86_64 -v
 
       - name: "Install wheel"
-        run: ${PYBIN}/pip install ./dist/*.whl
+        run: uv pip install --python ${PYBIN}/python ./dist/*.whl
 
       - name: "Run tests"
         run: ${PYBIN}/python -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
@@ -86,7 +86,10 @@ jobs:
           submodules: recursive
           persist-credentials: false
           fetch-depth: 0
-      
+
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v7
+
       - name: "Update bdk-ffi submodule to latest"
         run: |
           cd ./bdk-ffi/ \
@@ -106,17 +109,14 @@ jobs:
       - name: "Generate bdk.py and binaries"
         run: bash ./scripts/generate-macos-arm64.sh
 
-      - name: "Install build"
-        run: pip3 install build
-
       - name: "Build wheel"
         # Specifying the plat-name argument is necessary to build a wheel with the correct name,
         # see issue #350 for more information
-        run: python3 -m build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_arm64 --verbose
+        run: uv build --wheel -C=--build-option=--plat-name=macosx_11_0_arm64 -v
 
       - name: "Install wheel"
-        run: pip3 install ./dist/*.whl
-          
+        run: uv pip install --python python3 ./dist/*.whl
+
       - name: "Run tests"
         run: python3 -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
 
@@ -138,6 +138,9 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v7
+
       - name: "Update bdk-ffi submodule to latest"
         run: |
           cd ./bdk-ffi/ \
@@ -156,14 +159,11 @@ jobs:
       - name: "Generate bdk.py and binaries"
         run: bash ./scripts/generate-macos-x86_64.sh
 
-      - name: "Install build"
-        run: pip3 install build
-
       - name: "Build wheel"
-        run: python3 -m build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_x86_64 --verbose
+        run: uv build --wheel -C=--build-option=--plat-name=macosx_11_0_x86_64 -v
 
       - name: "Install wheel"
-        run: pip3 install ./dist/*.whl
+        run: uv pip install --python python3 ./dist/*.whl
 
       - name: "Run tests"
         run: python3 -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
@@ -186,17 +186,20 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v7
+
       - name: "Update bdk-ffi submodule to latest"
         run: |
-          cd ./bdk-ffi/; 
-          git fetch origin; 
-          git checkout master; 
-          git pull origin master; 
+          cd ./bdk-ffi/;
+          git fetch origin;
+          git checkout master;
+          git pull origin master;
           echo "Testing commit: $(git log -1 --pretty=format:'%h %s (author: %cn)')"
 
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
-      
+
       - name: "Install Python"
         uses: actions/setup-python@v4
         with:
@@ -205,14 +208,11 @@ jobs:
       - name: "Generate bdk.py and binaries"
         run: bash ./scripts/generate-windows.sh
 
-      - name: "Install build"
-        run: pip install build
-
       - name: "Build wheel"
-        run: python -m build --wheel --verbose
+        run: uv build --wheel -v
 
       - name: "Install dependencies"
-        run: Get-ChildItem 'D:\a\bdk-python\bdk-python\dist\*.whl' | ForEach-Object {pip install $_.FullName}
+        run: Get-ChildItem 'D:\a\bdk-python\bdk-python\dist\*.whl' | ForEach-Object {uv pip install --python python $_.FullName}
         shell: powershell
 
       - name: "Run tests"
@@ -232,8 +232,8 @@ jobs:
       - name: "Configure Git safe directory"
         run: git config --global --add safe.directory /__w/bdk-python/bdk-python
 
-      - name: "Install Ruff"
-        run: curl -LsSf https://astral.sh/ruff/install.sh | sh
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v7
 
       - name: "Lint test targets"
-        run: ruff check ./tests/
+        run: uvx ruff check ./tests/

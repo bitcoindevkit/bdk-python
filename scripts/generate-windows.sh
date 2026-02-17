@@ -6,10 +6,6 @@ printf "\nSubmodule check...\n"
 git submodule update --init
 printf "Submodule is checked out at commit: $(git submodule status)\n\n"
 
-echo "Setting up Python dependencies..."
-python3 --version
-pip install -r requirements.txt
-
 cd ./bdk-ffi/bdk-ffi/
 
 rustup target add x86_64-pc-windows-msvc

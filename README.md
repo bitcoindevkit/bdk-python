@@ -13,22 +13,22 @@ This repository uses the bdk-ffi repository as a git submodule. Here are useful 
 
 ## Local Testing and Usage
 
-1. Start a Python virtual environment
+1. Sync dependencies with `uv`
 2. Run one of the build script
 3. Create the wheel
 4. Install the library
 5. Run the tests
 
 ```sh
-source .localpythonenv/bin/activate
+uv sync
 
 bash scripts/generate-macos-arm64.sh
 
-python3 -m build --wheel --outdir dist --verbose 
+uv build --wheel -v
 
-pip3 install ./dist/bdkpython-<yourversion>.whl --force-reinstall
+uv pip install --python python3 ./dist/bdkpython-<yourversion>.whl --force-reinstall
 
-python3 -m unittest --verbose
+uv run python -m unittest --verbose
 ```
 
 ## Build HTML API Documentation (Optional)
@@ -37,7 +37,7 @@ python3 -m unittest --verbose
 7. Build HTML Documentation
 
 ```sh
-python3 ./docs/generate_docs.py
+uv run python ./docs/generate_docs.py
 
-python3 -m sphinx -b html -W --keep-going -v docs/source docs/_build/html
+uv run python -m sphinx -b html -W --keep-going -v docs/source docs/_build/html
 ```

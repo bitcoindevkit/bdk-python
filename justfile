@@ -19,17 +19,17 @@ clean:
 [group("Build")]
 [doc("Build the wheel using pyproject.toml (modern build system).")]
 build:
-  python3 -m build --wheel --verbose
+  uv build --wheel -v
 
 [group("Build")]
 [doc("Install the wheel locally (force reinstall).")]
 install:
-  pip3 install dist/bdkpython-*.whl --force-reinstall
+  uv pip install --python python3 dist/bdkpython-*.whl --force-reinstall
 
 [group("Build")]
 [doc("Build Sphinx api documentation.")]
 api-docs:
-  python3 -m sphinx -b html -W --keep-going -v docs/source docs/_build/html
+  uv run python -m sphinx -b html -W --keep-going -v docs/source docs/_build/html
 
 [group("Submodule")]
 [doc("Initialize bdk-ffi submodule to committed hash.")]
@@ -52,4 +52,4 @@ submodule-to-master:
 [group("Test")]
 [doc("Run all tests.")]
 test:
-  python3 -m unittest --verbose
+  uv run python -m unittest --verbose

@@ -30,24 +30,24 @@ jobs:
       - name: "Configure Git safe directory"
         run: git config --global --add safe.directory /__w/bdk-python/bdk-python
 
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v7
+
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
       - name: "Generate bdk.py and binaries"
         run: bash ./scripts/generate-linux.sh
 
-      - name: "Install build"
-        run: ${PYBIN}/pip install build
-
       - name: "Build wheel"
         # Specifying the plat-name argument is necessary to build a wheel with the correct name,
         # see issue #350 for more information
-        run: ${PYBIN}/python -m build --wheel --config-setting=--build-option=--plat-name=manylinux_2_28_x86_64 --verbose
+        run: UV_PYTHON=${PYBIN}/python uv build --wheel -C=--build-option=--plat-name=manylinux_2_28_x86_64 -v
 
       - uses: actions/upload-artifact@v4
         with:
           name: bdkpython-manylinux_2_28_x86_64-${{ matrix.python }}
-          path: /home/runner/work/bdk-python/bdk-python/dist/*.whl
+          path: dist/*.whl
 
   build-macos-arm64-wheels:
     name: "Build macOS arm64 wheel"
@@ -72,25 +72,25 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v7
+
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
       - name: "Generate bdk.py and binaries"
         run: bash ./scripts/generate-macos-arm64.sh
-      
-      - name: "Install build"
-        run: pip3 install build
 
       - name: "Build wheel"
         # Specifying the plat-name argument is necessary to build a wheel with the correct name,
         # see issue #350 for more information
-        run: python3 -m build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_arm64 --verbose
+        run: uv build --wheel -C=--build-option=--plat-name=macosx_11_0_arm64 -v
 
       - name: "Upload artifacts"
         uses: actions/upload-artifact@v4
         with:
           name: bdkpython-macos-arm64-${{ matrix.python }}
-          path: /Users/runner/work/bdk-python/bdk-python/dist/*.whl
+          path: dist/*.whl
 
   build-macos-x86_64-wheels:
     name: "Build macOS x86_64 wheel"
@@ -115,24 +115,24 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v7
+
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
       - name: "Generate bdk.py and binaries"
         run: bash ./scripts/generate-macos-x86_64.sh
 
-      - name: "Install build"
-        run: pip3 install build
-
       - name: "Build wheel"
         # Specifying the plat-name argument is necessary to build a wheel with the correct name,
         # see issue #350 for more information
-        run: python3 -m build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_x86_64 --verbose
+        run: uv build --wheel -C=--build-option=--plat-name=macosx_11_0_x86_64 -v
 
       - uses: actions/upload-artifact@v4
         with:
           name: bdkpython-macos-x86_64-${{ matrix.python }}
-          path: /Users/runner/work/bdk-python/bdk-python/dist/*.whl
+          path: dist/*.whl
 
   build-windows-wheels:
     name: "Build Windows wheel"
@@ -156,23 +156,23 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v7
+
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
-        
+
       - name: "Generate bdk.py and binaries"
         run: bash ./scripts/generate-windows.sh
 
-      - name: "Install build"
-        run: pip install build
-
       - name: "Build wheel"
-        run: python -m build --wheel --verbose
+        run: uv build --wheel -v
 
       - name: "Upload artifacts"
         uses: actions/upload-artifact@v4
         with:
           name: bdkpython-win-${{ matrix.python }}
-          path: D:\a\bdk-python\bdk-python\dist\*.whl
+          path: dist/*.whl
 
   publish-pypi:
     name: "Publish on PyPI"

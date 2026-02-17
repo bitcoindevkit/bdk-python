@@ -6,10 +6,6 @@ printf "\nSubmodule check...\n"
 git submodule update --init
 printf "Submodule is checked out at commit: $(git submodule status)\n\n"
 
-echo "Setting up Python dependencies..."
-${PYBIN}/python --version
-${PYBIN}/pip install -r requirements.txt
-
 cd ./bdk-ffi/bdk-ffi/
 
 echo "Generating native binaries..."
