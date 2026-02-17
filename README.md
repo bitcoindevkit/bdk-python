@@ -26,7 +26,7 @@ bash scripts/generate-macos-arm64.sh
 
 uv build --wheel -v
 
-uv pip install --python python3 ./dist/bdkpython-<yourversion>.whl --force-reinstall
+uv pip install ./dist/bdkpython-<yourversion>.whl --force-reinstall
 
 uv run python -m unittest --verbose
 ```

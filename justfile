@@ -24,7 +24,8 @@ build:
 [group("Build")]
 [doc("Install the wheel locally (force reinstall).")]
 install:
-  uv pip install --python python3 dist/bdkpython-*.whl --force-reinstall
+  uv venv
+  uv pip install dist/bdkpython-*.whl --force-reinstall
 
 [group("Build")]
 [doc("Build Sphinx api documentation.")]

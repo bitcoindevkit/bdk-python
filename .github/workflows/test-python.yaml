@@ -45,7 +45,7 @@ jobs:
         run: UV_PYTHON=${PYBIN}/python uv build --wheel -C=--build-option=--plat-name=manylinux_2_28_x86_64 -v
 
       - name: "Install wheel"
-        run: uv pip install --python ${PYBIN}/python ./dist/*.whl
+        run: uv pip install --system --python ${PYBIN}/python ./dist/*.whl
 
       - name: "Run tests"
         run: ${PYBIN}/python -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
@@ -95,7 +95,7 @@ jobs:
 
       - name: "Install wheel and run tests"
         run: |
-          uv pip install --python python3 ./dist/*.whl
+          uv pip install --system --python python3 ./dist/*.whl
           python3 -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
 
       - name: "Upload artifact test"
@@ -139,7 +139,7 @@ jobs:
         run: uv build --wheel -C=--build-option=--plat-name=macosx_11_0_x86_64 -v
 
       - name: "Install wheel"
-        run: uv pip install --python python3 ./dist/*.whl
+        run: uv pip install --system --python python3 ./dist/*.whl
 
       - name: "Run tests"
         run: python3 -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
@@ -192,7 +192,7 @@ jobs:
           path: dist/*.whl
 
       - name: "Install dependencies"
-        run: Get-ChildItem 'D:\a\bdk-python\bdk-python\dist\*.whl' | ForEach-Object {uv pip install --python python $_.FullName}
+        run: Get-ChildItem 'D:\a\bdk-python\bdk-python\dist\*.whl' | ForEach-Object {uv pip install --system --python python $_.FullName}
         shell: powershell
 
       - name: "Run tests"
