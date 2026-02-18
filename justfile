@@ -30,6 +30,7 @@ install:
 [group("Build")]
 [doc("Build Sphinx api documentation.")]
 api-docs:
+  uv run python docs/generate_docs.py
   uv run python -m sphinx -b html -W --keep-going -v docs/source docs/_build/html
 
 [group("Submodule")]
