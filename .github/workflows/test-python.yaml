@@ -23,7 +23,7 @@ jobs:
           - cp313-cp313
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
@@ -51,7 +51,7 @@ jobs:
         run: ${PYBIN}/python -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
 
       - name: "Upload artifact test"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: bdkpython-manylinux_2_28_x86_64-${{ matrix.python }}
           path: /home/runner/work/bdk-python/bdk-python/dist/*.whl
@@ -68,14 +68,14 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
           fetch-depth: 0
 
       - name: "Install Python"
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
       
@@ -100,7 +100,7 @@ jobs:
           python3 -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
 
       - name: "Upload artifact test"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: bdkpython-macos-arm64-${{ matrix.python }}
           path: /Users/runner/work/bdk-python/bdk-python/dist/*.whl
@@ -117,13 +117,13 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
           fetch-depth: 0
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -146,7 +146,7 @@ jobs:
         run: python3 -m unittest discover --start "./tests/" --pattern "test_offline_*.py" --verbose
 
       - name: "Upload artifact test"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: bdkpython-macos-x86_64-${{ matrix.python }}
           path: /Users/runner/work/bdk-python/bdk-python/dist/*.whl
@@ -163,14 +163,14 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
           fetch-depth: 0
 
       - name: "Install Python"
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -187,7 +187,7 @@ jobs:
         run: python -m build --wheel --verbose
 
       - name: "Upload artifact test"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: bdkpython-windows-${{ matrix.python }}
           path: D:\a\bdk-python\bdk-python\dist\*.whl
@@ -204,7 +204,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
