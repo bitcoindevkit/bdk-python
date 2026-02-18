@@ -21,7 +21,7 @@ jobs:
           - cp313-cp313
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
@@ -44,7 +44,7 @@ jobs:
         # see issue #350 for more information
         run: ${PYBIN}/python -m build --wheel --config-setting=--build-option=--plat-name=manylinux_2_28_x86_64 --verbose
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: bdkpython-manylinux_2_28_x86_64-${{ matrix.python }}
           path: /home/runner/work/bdk-python/bdk-python/dist/*.whl
@@ -61,14 +61,14 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
           fetch-depth: 0
 
       - name: "Install Python"
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -87,7 +87,7 @@ jobs:
         run: python3 -m build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_arm64 --verbose
 
       - name: "Upload artifacts"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: bdkpython-macos-arm64-${{ matrix.python }}
           path: /Users/runner/work/bdk-python/bdk-python/dist/*.whl
@@ -104,14 +104,14 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
           fetch-depth: 0
 
       - name: "Install Python"
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -129,7 +129,7 @@ jobs:
         # see issue #350 for more information
         run: python3 -m build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_x86_64 --verbose
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: bdkpython-macos-x86_64-${{ matrix.python }}
           path: /Users/runner/work/bdk-python/bdk-python/dist/*.whl
@@ -146,13 +146,13 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
           fetch-depth: 0
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -169,7 +169,7 @@ jobs:
         run: python -m build --wheel --verbose
 
       - name: "Upload artifacts"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: bdkpython-win-${{ matrix.python }}
           path: D:\a\bdk-python\bdk-python\dist\*.whl
@@ -180,12 +180,12 @@ jobs:
     needs: [build-manylinux_2_28-x86_64-wheels, build-macos-arm64-wheels, build-macos-x86_64-wheels, build-windows-wheels]
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
       - name: "Download artifacts in dist/ directory"
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           path: dist/
 

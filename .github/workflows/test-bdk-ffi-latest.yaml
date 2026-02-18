@@ -25,7 +25,7 @@ jobs:
           - cp313-cp313
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
@@ -81,7 +81,7 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
@@ -99,7 +99,7 @@ jobs:
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
       - name: "Install Python"
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -132,7 +132,7 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
@@ -149,7 +149,7 @@ jobs:
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -180,7 +180,7 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
@@ -198,7 +198,7 @@ jobs:
         uses: actions-rust-lang/setup-rust-toolchain@v1
       
       - name: "Install Python"
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -223,7 +223,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           persist-credentials: false
