@@ -42,7 +42,7 @@ wheels = [
 
 [[package]]
 name = "bdkpython"
-version = "2.1.0.dev0"
+version = "2.3.1"
 source = { editable = "." }
 
 [package.dev-dependencies]
