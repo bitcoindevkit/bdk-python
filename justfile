@@ -24,7 +24,6 @@ build:
 [group("Build")]
 [doc("Install the wheel locally (force reinstall).")]
 install:
-  uv venv
   uv pip install dist/bdkpython-*.whl --force-reinstall
 
 [group("Build")]

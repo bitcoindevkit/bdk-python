@@ -21,13 +21,9 @@ This repository uses the bdk-ffi repository as a git submodule. Here are useful 
 
 ```sh
 uv sync
-
 bash scripts/generate-macos-arm64.sh
-
 uv build --wheel -v
-
 uv pip install ./dist/bdkpython-<yourversion>.whl --force-reinstall
-
 uv run python -m unittest --verbose
 ```
 
@@ -38,6 +34,5 @@ uv run python -m unittest --verbose
 
 ```sh
 uv run python ./docs/generate_docs.py
-
 uv run python -m sphinx -b html -W --keep-going -v docs/source docs/_build/html
 ```
