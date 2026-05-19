@@ -13,15 +13,19 @@ This repository uses the bdk-ffi repository as a git submodule. Here are useful 
 
 ## Local Testing and Usage
 
-1. Sync dependencies with `uv`
-2. Run one of the build script
+1. Run one of the build script (skip the submodule update if you are making local changes to the bdk-ffi submodule)
+2. Sync dependencies with `uv`
 3. Create the wheel
 4. Install the library
 5. Run the tests
 
 ```sh
-uv sync
+# If you made changes to the bdk-ffi submodule and wish to use those instead of the committed hash
+bash scripts/generate-macos-arm64.sh --skip-submodule-update
+# Otherwise
 bash scripts/generate-macos-arm64.sh
+
+uv sync
 uv build --wheel -v
 uv pip install ./dist/bdkpython-<yourversion>.whl --force-reinstall
 uv run python -m unittest --verbose
