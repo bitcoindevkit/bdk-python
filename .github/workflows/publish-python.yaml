@@ -1,5 +1,8 @@
 name: Publish bdkpython to PyPI
 on: [workflow_dispatch]
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  PIP_NO_CACHE_DIR: "1"
 
 permissions: {}
 
@@ -21,7 +24,7 @@ jobs:
           - cp313-cp313
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           persist-credentials: false
@@ -32,6 +35,8 @@ jobs:
 
       - name: "Install uv"
         uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: false
 
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -44,7 +49,7 @@ jobs:
         # see issue #350 for more information
         run: UV_PYTHON=${PYBIN}/python uv build --wheel --config-setting=--build-option=--plat-name=manylinux_2_28_x86_64 --verbose
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v7
         with:
           name: bdkpython-manylinux_2_28_x86_64-${{ matrix.python }}
           path: dist/*.whl
@@ -61,19 +66,21 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           persist-credentials: false
           fetch-depth: 0
 
       - name: "Install Python"
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python }}
 
       - name: "Install uv"
         uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: false
 
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -87,7 +94,7 @@ jobs:
         run: uv build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_arm64 --verbose
 
       - name: "Upload artifacts"
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: bdkpython-macos-arm64-${{ matrix.python }}
           path: dist/*.whl
@@ -104,19 +111,21 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           persist-credentials: false
           fetch-depth: 0
 
       - name: "Install Python"
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python }}
 
       - name: "Install uv"
         uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: false
 
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -129,7 +138,7 @@ jobs:
         # see issue #350 for more information
         run: uv build --wheel --config-setting=--build-option=--plat-name=macosx_11_0_x86_64 --verbose
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v7
         with:
           name: bdkpython-macos-x86_64-${{ matrix.python }}
           path: dist/*.whl
@@ -146,18 +155,20 @@ jobs:
           - "3.13"
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           persist-credentials: false
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python }}
 
       - name: "Install uv"
         uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: false
 
       - name: "Set up Rust"
         uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -169,7 +180,7 @@ jobs:
         run: uv build --wheel --verbose
 
       - name: "Upload artifacts"
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: bdkpython-win-${{ matrix.python }}
           path: dist/*.whl
@@ -178,28 +189,33 @@ jobs:
     name: "Publish on PyPI"
     runs-on: ubuntu-24.04
     needs: [build-manylinux_2_28-x86_64-wheels, build-macos-arm64-wheels, build-macos-x86_64-wheels, build-windows-wheels]
+    environment: 
+      name: pypi
+      url: https://pypi.org/project/bdkpython/
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+      artifact-metadata: write
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: "Download artifacts in dist/ directory"
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           path: dist/
+          merge-multiple: true
 
       # - name: "Publish on test PyPI"
       #   uses: pypa/gh-action-pypi-publish@release/v1
       #   with:
-      #     user: __token__
-      #     password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-      #     repository_url: https://test.pypi.org/legacy/
-      #     packages_dir: dist/*/
+      #     repository-url: https://test.pypi.org/legacy/
+      #     packages-dir: dist/
 
       - name: "Publish on PyPI"
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
-          packages_dir: dist/*/
+          packages-dir: dist/
