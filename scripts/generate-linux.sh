@@ -14,7 +14,7 @@ fi
 cd ./bdk-ffi/bdk-ffi/
 
 echo "Generating native binaries..."
-cargo build --profile release-smaller
+cargo build --locked --profile release-smaller
 
 echo "Generating bdk.py..."
 cargo run --bin uniffi-bindgen generate --library ./target/release-smaller/libbdkffi.so --language python --out-dir ../../src/bdkpython/ --no-format
