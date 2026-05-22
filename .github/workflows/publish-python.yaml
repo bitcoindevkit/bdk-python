@@ -196,7 +196,6 @@ jobs:
       id-token: write
       contents: read
       attestations: write
-      artifact-metadata: write
     steps:
       - name: "Checkout"
         uses: actions/checkout@v6
@@ -208,12 +207,6 @@ jobs:
         with:
           path: dist/
           merge-multiple: true
-
-      # - name: "Publish on test PyPI"
-      #   uses: pypa/gh-action-pypi-publish@release/v1
-      #   with:
-      #     repository-url: https://test.pypi.org/legacy/
-      #     packages-dir: dist/
 
       - name: "Publish on PyPI"
         uses: pypa/gh-action-pypi-publish@release/v1
