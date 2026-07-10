@@ -31,6 +31,18 @@ uv pip install ./dist/bdkpython-<yourversion>.whl --force-reinstall
 uv run python -m unittest --verbose
 ```
 
+## Examples
+
+This repository includes small offline examples that mirror the JVM binding examples in [bdk-jvm](https://github.com/bitcoindevkit/bdk-jvm/tree/master/examples/src/main/kotlin).
+
+After installing the library locally (see [Local Testing and Usage](#local-testing-and-usage)), run:
+
+```sh
+uv run python examples/wallet_setup_bip32.py
+```
+
+`wallet_setup_bip32.py` demonstrates creating a BIP84 wallet from a fixed sample mnemonic, revealing external and internal addresses, and printing the wallet balance. It runs offline and does not require a Bitcoin node or Esplora server. The mnemonic is for demonstration only and must not be used for real funds.
+
 ## Build HTML API Documentation (Optional)
 
 6. Generate docs
