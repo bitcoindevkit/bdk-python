@@ -54,3 +54,8 @@ submodule-to-master:
 [doc("Run all tests.")]
 test:
   uv run python -m unittest --verbose
+
+[group("Test")]
+[doc("Lint the test targets (same command CI runs).")]
+lint:
+  uv run --isolated --only-group lint ruff check ./tests/

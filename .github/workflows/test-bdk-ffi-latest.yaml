@@ -236,4 +236,4 @@ jobs:
         uses: astral-sh/setup-uv@v7
 
       - name: "Lint test targets"
-        run: uvx ruff check ./tests/
+        run: uv run --isolated --only-group lint ruff check ./tests/
