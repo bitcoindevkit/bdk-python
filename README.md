@@ -11,6 +11,17 @@ This repository uses the bdk-ffi repository as a git submodule. Here are useful 
 1. When initially cloning the repo, the `bdk-ffi` submodule will be empty locally. You can initiate/populate the directory by using the `just submodule-init` command.
 2. If you make local changes to the `bdk-ffi` directory while developing and want to hard delete all changes and return to the exact committed version hash of the bdk-ffi repo, use the `just submodule-reset` command.
 
+## Prerequisites
+
+Before building `bdkpython` locally, ensure you have installed the following tools:
+
+- **Rust toolchain (`rustup`)**: Required to compile `bdk-ffi`. Install from [rustup.rs](https://rustup.rs/).
+- **`uv`**: Fast Python package installer and resolver. Install from [Astral uv Docs](https://docs.astral.sh/uv/).
+- **`just` (optional)**: Command runner used for repo tasks. Install via `cargo install just` or your system package manager.
+
+_Windows Users_
+- **Windows**: Rust's `x86_64-pc-windows-msvc` target needs the MSVC toolchain and Windows SDK. `rustup-init` offers to install these for you; otherwise install Visual Studio Build Tools with the *Desktop development with C++* workload. The build scripts are bash, so run them from **Git Bash**.
+
 ## Local Testing and Usage
 
 1. Run one of the build scripts (skip the submodule update if you are making local changes to the `bdk-ffi` submodule)
