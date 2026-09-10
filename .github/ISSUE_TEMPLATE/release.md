@@ -4,6 +4,8 @@ about: "Create a new release [for release managers only]"
 title: "Release MAJOR.MINOR.PATCH"
 ---
 
+## Todo list for publishing the release
+
 - [ ] Bump the bdk-ffi submodule to the release tag in bdk-ffi.
 - [ ] Delete the `dist`, `build`, and `bdkpython.egg-info` and rust `target` directories to make sure you are building the library from scratch without any caches.
 - [ ] Build the library.
@@ -31,9 +33,9 @@ git tag v0.6.0 --sign --edit
 ```
 
 ```md
-Release 2.3.1
+Release 3.0.0
 
-See https://github.com/bitcoindevkit/bdk-ffi/releases/tag/v2.3.1 and https://github.com/bitcoindevkit/bdk-ffi/releases/tag/v2.3.0 as well as our changelog at https://github.com/bitcoindevkit/bdk-ffi/blob/master/CHANGELOG.md for release details.
+For details on this release, see the bdk-ffi repository and [our release notes for the 3.0.0 release](https://github.com/bitcoindevkit/bdk-ffi/releases/tag/v3.0.0) as well as our [Changelog](https://github.com/bitcoindevkit/bdk-ffi/blob/master/CHANGELOG.md).
 ```
 
 - [ ] Push the tag to GitHub, and let the CI run all tests one more time.
