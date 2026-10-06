@@ -21,8 +21,6 @@ jobs:
       matrix:
         python:
           - cp310-cp310
-          - cp311-cp311
-          - cp312-cp312
           - cp313-cp313
     steps:
       - name: "Checkout"
@@ -66,8 +64,6 @@ jobs:
       matrix:
         python:
           - "3.10"
-          - "3.11"
-          - "3.12"
           - "3.13"
     steps:
       - name: "Checkout"
@@ -114,8 +110,6 @@ jobs:
       matrix:
         python:
           - "3.10"
-          - "3.11"
-          - "3.12"
           - "3.13"
     steps:
       - name: "Checkout"
@@ -160,8 +154,6 @@ jobs:
       matrix:
         python:
           - "3.10"
-          - "3.11"
-          - "3.12"
           - "3.13"
     steps:
       - name: "Checkout"
