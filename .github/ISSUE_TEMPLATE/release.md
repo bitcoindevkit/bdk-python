@@ -6,6 +6,7 @@ title: "Release MAJOR.MINOR.PATCH"
 
 ## Todo list for publishing the release
 
+- [ ] Create a new branch off of `master` called `release/<feature version>`, e.g. `release/3.1`
 - [ ] Bump the bdk-ffi submodule to the release tag in bdk-ffi.
 - [ ] Delete the `dist`, `build`, and `bdkpython.egg-info` and rust `target` directories to make sure you are building the library from scratch without any caches.
 - [ ] Build the library.
@@ -23,13 +24,12 @@ just install
 just test
 ```
 
-- [ ] Update the readme if necessary
-- [ ] Create a new branch off of `master` called `release/<feature version>`, e.g. `release/0.31`
-- [ ] Update library version from `.dev` version to release version
+- [ ] Update library version from `.dev` version to release version.
+- [ ] PR the changes above (submodule tag bump + library version bump) above and merge.
 - [ ] Create the tag for the release and make sure to add a link to the bdk-ffi changelog to the tag. See below for the template of the message we use for tags in this repository.
 
 ```shell
-git tag v0.6.0 --sign --edit
+git tag v3.0.0 --sign --edit
 ```
 
 ```md
@@ -41,7 +41,7 @@ For details on this release, see the bdk-ffi repository and [our release notes f
 - [ ] Push the tag to GitHub, and let the CI run all tests one more time.
 
 ```shell
-git push upstream v0.6.0
+git push upstream v3.0.0
 ```
 
 - [ ] Trigger release through the workflow dispatch with the new tag.
