@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         python:
-          - cp310-cp310
+          - cp311-cp311
           - cp314-cp314
     steps:
       - name: "Checkout"
@@ -73,7 +73,7 @@ jobs:
     strategy:
       matrix:
         python:
-          - "3.10"
+          - "3.11"
           - "3.14"
     steps:
       - name: "Checkout"
@@ -122,7 +122,7 @@ jobs:
     strategy:
       matrix:
         python:
-          - "3.10"
+          - "3.11"
           - "3.14"
     steps:
       - name: "Checkout"
@@ -168,7 +168,7 @@ jobs:
     strategy:
       matrix:
         python:
-          - "3.10"
+          - "3.11"
           - "3.14"
     steps:
       - name: "Checkout"
