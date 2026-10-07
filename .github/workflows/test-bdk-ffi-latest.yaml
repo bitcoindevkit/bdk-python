@@ -20,7 +20,7 @@ jobs:
       matrix:
         python:
           - cp310-cp310
-          - cp313-cp313
+          - cp314-cp314
     steps:
       - name: "Checkout"
         uses: actions/checkout@v5
@@ -74,7 +74,7 @@ jobs:
       matrix:
         python:
           - "3.10"
-          - "3.13"
+          - "3.14"
     steps:
       - name: "Checkout"
         uses: actions/checkout@v5
@@ -123,7 +123,7 @@ jobs:
       matrix:
         python:
           - "3.10"
-          - "3.13"
+          - "3.14"
     steps:
       - name: "Checkout"
         uses: actions/checkout@v5
@@ -169,7 +169,7 @@ jobs:
       matrix:
         python:
           - "3.10"
-          - "3.13"
+          - "3.14"
     steps:
       - name: "Checkout"
         uses: actions/checkout@v5
