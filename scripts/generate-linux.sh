@@ -17,7 +17,7 @@ echo "Generating native binaries..."
 cargo build --locked --profile release-smaller
 
 echo "Generating bdk.py..."
-cargo run --bin uniffi-bindgen generate --library ./target/release-smaller/libbdkffi.so --language python --out-dir ../../src/bdkpython/ --no-format
+cargo run --locked --features uniffi-bindgen --bin uniffi-bindgen generate --library ./target/release-smaller/libbdkffi.so --language python --out-dir ../../src/bdkpython/ --no-format
 
 echo "Copying linux libbdkffi.so..."
 cp ./target/release-smaller/libbdkffi.so ../../src/bdkpython/libbdkffi.so
